@@ -1,192 +1,282 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lofi Brainrots - Loja Oficial</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0a0a0a; color: #fff; font-family: 'Inter', sans-serif; line-height: 1.6; }
-    header { background: linear-gradient(135deg, #1a1a1a, #2c2c2c); padding: 40px 20px; text-align: center; border-bottom: 3px solid #d4af37; }
-    h1 { font-family: 'Playfair Display', serif; font-size: 3.2em; color: #d4af37; margin-bottom: 8px; }
-    .subtitle { color: #aaa; font-size: 1.3em; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    h2 { text-align: center; color: #d4af37; margin-bottom: 40px; font-size: 2.2em; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-    .card { background: #111111; border-radius: 16px; overflow: hidden; border: 1px solid #333; transition: all 0.4s; }
-    .card:hover { transform: translateY(-10px); border-color: #d4af37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
-    .card img { width: 100%; height: 240px; object-fit: contain; background: #1a1a1a; padding: 20px; }
-    .card-content { padding: 20px; text-align: center; }
-    .card h3 { color: #fff; margin-bottom: 10px; font-size: 1.4em; }
-    .price { font-size: 1.8em; color: #d4af37; font-weight: 700; margin: 12px 0; }
-    .btn-pix { background: linear-gradient(90deg, #d4af37, #f0d070); color: #000; font-weight: bold; font-size: 1.1em; padding: 14px 30px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; transition: 0.3s; }
-    .btn-pix:hover { background: linear-gradient(90deg, #f0d070, #d4af37); transform: scale(1.05); }
-    .info { font-size: 0.95em; color: #888; margin-top: 15px; }
-    footer { text-align: center; padding: 40px 20px; background: #0a0a0a; border-top: 2px solid #333; margin-top: 60px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lofi Brainrots — Loja com Carrinho + Estoque</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0b0c10; --panel:#12141a; --muted:#9aa3b2; --txt:#eef2f7; --gold:#d4af37; --gold2:#f0d070; --line:#222633; --danger:#ff6b6b; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+  header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,#12141a,rgba(18,20,26,.85));backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--line)}
+ .wrap{max-width:1200px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;gap:14px;justify-content:space-between}
+ .brand{display:flex;align-items:center;gap:12px}
+ .brand h1{font-family:"Playfair Display",serif;color:var(--gold);letter-spacing:.5px}
+ .cart-btn{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;font-weight:800;border:0;padding:10px 16px;border-radius:12px;cursor:pointer}
+ .badge{background:#000;color:var(--gold);padding:2px 8px;border-radius:999px;font-weight:800;border:1px solid #333}
+  main{max-width:1200px;margin:26px auto;padding:0 20px;display:grid;grid-template-columns:1fr 360px;gap:22px}
+  @media(max-width:980px){ main{grid-template-columns:1fr} }
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+ .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform.15s ease, box-shadow.15s ease, opacity.2s}
+ .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
+ .card.out{opacity:.6}
+ .thumb{background:#0f1117;border-bottom:1px solid var(--line);aspect-ratio:1/1;display:grid;place-items:center;padding:16px;position:relative}
+ .thumb img{max-width:88%;max-height:88%;object-fit:contain;filter:drop-shadow(0 8px 22px rgba(0,0,0,.45))}
+ .soldout{position:absolute;top:12px;left:12px;background:var(--danger);color:#000;font-weight:900;padding:6px 10px;border-radius:999px;border:2px solid #000}
+ .stockpill{position:absolute;bottom:12px;right:12px;background:#0f1117;border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+ .body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px}
+ .name{font-weight:800}
+ .price{color:var(--gold);font-weight:800;font-size:20px}
+ .muted{color:var(--muted);font-size:12px}
+ .row{display:flex;gap:10px;align-items:center;margin-top:auto}
+ .btn{flex:1;text-align:center;background:#1a1f2b;border:1px solid #2a3142;color:var(--txt);padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+ .btn:disabled{opacity:.5;cursor:not-allowed}
+ .btn:hover{border-color:#3a4252}
+ .btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;border:0}
+  aside{position:sticky;top:84px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  aside h2{font-size:20px;margin-bottom:8px}
+ .line{height:1px;background:var(--line);margin:12px 0}
+ .cart-empty{color:var(--muted);text-align:center;padding:18px 6px;border:1px dashed #2a3142;border-radius:12px}
+ .item{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:8px 0}
+ .item img{width:48px;height:48px;object-fit:contain;background:#0f1117;border:1px solid var(--line);border-radius:10px;padding:6px}
+ .item.name{font-size:14px}
+ .qty{display:flex;align-items:center;gap:6px}
+ .qty button{width:26px;height:26px;border-radius:8px;border:1px solid #2a3142;background:#171b26;color:var(--txt);cursor:pointer}
+ .remove{background:transparent;border:0;color:#ff6b6b;cursor:pointer;font-size:12px}
+ .tot{display:flex;justify-content:space-between;margin:6px 0}
+ .tot strong{font-size:18px}
+ .pay{display:grid;gap:10px;margin-top:10px}
+ .pay.btn{padding:14px}
+  footer{max-width:1200px;margin:30px auto 60px;padding:0 20px;color:var(--muted);text-align:center}
+ .note{font-size:12px;color:var(--muted)}
+  /* Admin panel */
+ .admin{margin-top:16px;padding:14px;border:1px dashed #3a4252;border-radius:12px;background:#0f1117}
+ .admin h3{margin-bottom:8px}
+ .admin.row2{display:grid;grid-template-columns:1fr 90px 90px;gap:8px;align-items:center;margin:6px 0}
+ .admin input[type="number"]{width:100%;padding:8px;border-radius:8px;border:1px solid #2a3142;background:#12141a;color:#fff}
+ .admin.save{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;border:0;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer;margin-top:8px}
+ .pill{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid #2a3142;color:var(--muted);font-size:12px}
+</style>
 </head>
 <body>
-
-  <header>
-    <h1>LOFI BRAINROTS</h1>
-    <p class="subtitle">Loja Oficial • PIX Rápido</p>
-  </header>
-
-  <div class="container">
-    <h2>Brainrots à Venda</h2>
-
-    <div class="grid">
-
-      <!-- Lavadorito Spinito -->
-      <div class="card">
-        <img src="https://i.imgur.com/9FZVver.png" alt="Lavadorito Spinito">
-        <div class="card-content">
-          <h3>Lavadorito Spinito</h3>
-          <p class="price">R$ 32</p>
-          <button class="btn-pix" onclick="pagar('Lavadorito Spinito - R$ 32')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Ketupath (Ketupat Kepat) -->
-      <div class="card">
-        <img src="https://i.imgur.com/AJ8bfFB.png" alt="Ketupath">
-        <div class="card-content">
-          <h3>Ketupath (Ketupat Kepat)</h3>
-          <p class="price">R$ 25</p>
-          <button class="btn-pix" onclick="pagar('Ketupath - R$ 25')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Capitano (Capitano Moby) -->
-      <div class="card">
-        <img src="https://i.imgur.com/OMqnmmh.png" alt="Capitano Moby">
-        <div class="card-content">
-          <h3>Capitano (Capitano Moby)</h3>
-          <p class="price">R$ 110</p>
-          <button class="btn-pix" onclick="pagar('Capitano Moby - R$ 110')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Garama (Garama and Madundung) -->
-      <div class="card">
-        <img src="https://i.imgur.com/0A42ZGl.png" alt="Garama and Madundung">
-        <div class="card-content">
-          <h3>Garama (Garama and Madundung)</h3>
-          <p class="price">R$ 48</p>
-          <button class="btn-pix" onclick="pagar('Garama - R$ 48')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Tang Tang (Tang Tang Keletang) -->
-      <div class="card">
-        <img src="https://i.imgur.com/WgcHF83.png" alt="Tang Tang Keletang">
-        <div class="card-content">
-          <h3>Tang Tang (Tang Tang Keletang)</h3>
-          <p class="price">R$ 28</p>
-          <button class="btn-pix" onclick="pagar('Tang Tang - R$ 28')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Los Bros -->
-      <div class="card">
-        <img src="https://i.imgur.com/7vExo9Q.png" alt="Los Bros">
-        <div class="card-content">
-          <h3>Los Bros</h3>
-          <p class="price">R$ 22</p>
-          <button class="btn-pix" onclick="pagar('Los Bros - R$ 22')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Las Sis -->
-      <div class="card">
-        <img src="https://i.imgur.com/EAdqCHh.png" alt="Las Sis">
-        <div class="card-content">
-          <h3>Las Sis</h3>
-          <p class="price">R$ 16</p>
-          <button class="btn-pix" onclick="pagar('Las Sis - R$ 16')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Nuclearo (Nuclearo Dinossauro) -->
-      <div class="card">
-        <img src="https://i.imgur.com/w9aRsH6.png" alt="Nuclearo Dinossauro">
-        <div class="card-content">
-          <h3>Nuclearo (Nuclearo Dinossauro)</h3>
-          <p class="price">R$ 12</p>
-          <button class="btn-pix" onclick="pagar('Nuclearo - R$ 12')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Golg Gold (Gold Gold Gold) -->
-      <div class="card">
-        <img src="https://i.imgur.com/wfYLs2W.png" alt="Golg Gold">
-        <div class="card-content">
-          <h3>Golg Gold (Gold Gold Gold)</h3>
-          <p class="price">R$ 30</p>
-          <button class="btn-pix" onclick="pagar('Golg Gold - R$ 30')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Los Burritos -->
-      <div class="card">
-        <img src="https://i.imgur.com/ZrU85UX.png" alt="Los Burritos">
-        <div class="card-content">
-          <h3>Los Burritos</h3>
-          <p class="price">R$ 8</p>
-          <button class="btn-pix" onclick="pagar('Los Burritos - R$ 8')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Los Quesadilhas (Los Quesadillas) -->
-      <div class="card">
-        <img src="https://i.imgur.com/AwhFzj3.png" alt="Los Quesadilhas">
-        <div class="card-content">
-          <h3>Los Quesadilhas (Los Quesadillas)</h3>
-          <p class="price">R$ 9</p>
-          <button class="btn-pix" onclick="pagar('Los Quesadilhas - R$ 9')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
-      <!-- Six Seven (Los 67) -->
-      <div class="card">
-        <img src="https://i.imgur.com/8iMaWz7.png" alt="Six Seven">
-        <div class="card-content">
-          <h3>Six Seven (Los 67)</h3>
-          <p class="price">R$ 18</p>
-          <button class="btn-pix" onclick="pagar('Six Seven - R$ 18')">Pagar via PIX</button>
-          <p class="info">Liberado só depois do pagamento</p>
-        </div>
-      </div>
-
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.5 6.5L22 9l-5 4.9L18.5 22 12 18.3 5.5 22 7 13.9 2 9l6.5-.5L12 2z" fill="#d4af37"/></svg>
+      <h1>LOFI BRAINROTS</h1>
     </div>
+    <button class="cart-btn" id="openCartBtn">Carrinho <span class="badge" id="cartCount">0</span></button>
   </div>
+</header>
 
-  <footer>
-    <p><strong>Pagamento via PIX • Liberado imediatamente após confirmação</strong></p>
-    <p>Manda comprovante pra eu liberar!</p>
-    <p style="margin-top: 20px; color: #666;">Lofi Brainrots © 2026</p>
-  </footer>
+<main>
+  <section>
+    <div class="grid" id="productGrid"></div>
+  </section>
 
-  <script>
-    function pagar(item) {
-      window.open('https://linkspix.app/huroo', '_blank');
-      setTimeout(() => {
-        alert(`PIX aberto! Item: ${item}\n\nManda o comprovante pra eu liberar rápido.`);
-      }, 800);
-    }
-  </script>
+  <aside id="cartPanel">
+    <h2>Seu carrinho</h2>
+    <div id="cartList"></div>
+    <div class="line"></div>
+    <div class="tot"><span>Subtotal</span><strong id="subtotal">R$ 0,00</strong></div>
+    <div class="tot"><span>Taxa</span><span class="note">R$ 0,00</span></div>
+    <div class="tot" style="font-size:18px"><span>Total</span><strong id="total">R$ 0,00</strong></div>
+    <div class="pay">
+      <button class="btn btn-gold" id="checkoutBtn">Finalizar no PIX</button>
+      <button class="btn" id="clearBtn">Esvaziar carrinho</button>
+      <p class="note">Após pagar, envie o comprovante pra liberar os itens.</p>
+    </div>
 
+    <div class="admin" id="adminPanel" style="display:none">
+      <h3>Admin — Estoque <span class="pill">somente com chave</span></h3>
+      <div id="adminRows"></div>
+      <button class="save" id="saveStock">Salvar estoque</button>
+      <p class="note">Use a URL com <code>?admin=SUA_CHAVE</code> para abrir este painel. 0 = esgotado.</p>
+    </div>
+  </aside>
+</main>
+
+<footer> Lofi Brainrots © 2026 — feito rapidinho pra você.</footer>
+
+<script>
+/** CONFIG — preços já atualizados */
+const PRODUCTS = [
+  { id:'lavadorito', name:'Lavadorito Spinito', price:15.00, img:'https://i.imgur.com/9FZVver.png' },
+  { id:'ketupath', name:'Ketupath (Ketupat Kepat)', price:15.00, img:'https://i.imgur.com/AJ8bfFB.png' },
+  { id:'capitano', name:'Capitano Mobi', price:70.00, img:'https://i.imgur.com/OMqnmmh.png' },
+  { id:'garama', name:'Garama (Garama & Madundung)', price:20.00, img:'https://i.imgur.com/0A42ZGl.png' },
+  { id:'tang', name:'Tang Tang (Keletang)', price:10.00, img:'https://i.imgur.com/WgcHF83.png' },
+  { id:'sis', name:'Las Sis', price:15.00, img:'https://i.imgur.com/EAdqCHh.png' },
+  { id:'bros', name:'Los Bros', price:15.00, img:'https://i.imgur.com/7vExo9Q.png' },
+  { id:'nuclearo', name:'Nuclero (Dinossauro)', price:12.00, img:'https://i.imgur.com/w9aRsH6.png' },
+  { id:'gold', name:'Gold Gold (Gold Gold Gold)', price:30.00, img:'https://i.imgur.com/wfYLs2W.png' },
+  { id:'burritos', name:'Los Burritos', price:5.00, img:'https://i.imgur.com/ZrU85UX.png' },
+  { id:'quesa', name:'Los Quessadilhas (Quesadillas)', price:5.00, img:'https://i.imgur.com/AwhFzj3.png' },
+  { id:'sixseven', name:'Six Seven (Los 67)', price:3.50, img:'https://i.imgur.com/8iMaWz7.png' },
+];
+
+/** PIX link */
+const PIX_LINK = 'https://linkspix.app/huroo';
+
+/** CHAVE DO ADMIN — troque por algo só seu */
+const ADMIN_KEY = 'lofi2026';
+
+/** Estoque: carrega do localStorage ou usa default */
+const DEFAULT_STOCK = 10;
+let STOCK = loadStock();
+
+function loadStock(){
+  try{
+    const raw = localStorage.getItem('stock');
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  const obj = {};
+  PRODUCTS.forEach(p => obj[p.id] = DEFAULT_STOCK);
+  return obj;
+}
+function saveStock(){
+  localStorage.setItem('stock', JSON.stringify(STOCK));
+}
+
+/** Detecta modo admin via?admin=CHAVE */
+const urlParams = new URLSearchParams(location.search);
+const isAdmin = urlParams.get('admin') === ADMIN_KEY;
+if(isAdmin) document.getElementById('adminPanel').style.display = 'block';
+
+/** Estado do carrinho */
+const cart = new Map(); // id -> {product, qty}
+
+const elGrid = document.getElementById('productGrid');
+const elCartList = document.getElementById('cartList');
+const elCount = document.getElementById('cartCount');
+const elSubtotal = document.getElementById('subtotal');
+const elTotal = document.getElementById('total');
+
+function formatBRL(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+
+function renderProducts(){
+  elGrid.innerHTML = PRODUCTS.map(p => {
+    const s = STOCK[p.id]?? 0;
+    const out = s <= 0;
+    return `
+    <article class="card ${out?'out':''}">
+      <div class="thumb">
+        ${out?'<div class="soldout">ESGOTADO</div>':''}
+        <img src="${p.img}" alt="${p.name}">
+        <div class="stockpill">Estoque: ${s}</div>
+      </div>
+      <div class="body">
+        <div class="name">${p.name}</div>
+        <div class="price">${formatBRL(p.price)}</div>
+        <div class="muted">Entrega digital após confirmação do PIX</div>
+        <div class="row">
+          <button class="btn" ${out?'disabled':''} onclick="addToCart('${p.id}')">Adicionar</button>
+          <button class="btn btn-gold" ${out?'disabled':''} onclick="buyNow('${p.id}')">Comprar</button>
+        </div>
+      </div>
+    </article>
+    `;
+  }).join('');
+}
+
+function renderCart(){
+  const items = Array.from(cart.values());
+  if(items.length === 0){
+    elCartList.innerHTML = `<div class="cart-empty">Seu carrinho está vazio.</div>`;
+  } else {
+    elCartList.innerHTML = items.map(({product, qty}) => `
+      <div class="item">
+        <img src="${product.img}" alt="${product.name}">
+        <div>
+          <div class="name">${product.name}</div>
+          <div class="muted">${formatBRL(product.price)} cada • estoque ${STOCK[product.id]??0}</div>
+          <div class="qty">
+            <button onclick="dec('${product.id}')">-</button>
+            <span>${qty}</span>
+            <button onclick="inc('${product.id}')">+</button>
+            <button class="remove" onclick="removeItem('${product.id}')">remover</button>
+          </div>
+        </div>
+        <div><strong>${formatBRL(product.price * qty)}</strong></div>
+      </div>
+    `).join('');
+  }
+  const subtotal = items.reduce((s,i)=> s + i.product.price * i.qty, 0);
+  elSubtotal.textContent = formatBRL(subtotal);
+  elTotal.textContent = formatBRL(subtotal);
+  elCount.textContent = items.reduce((s,i)=> s + i.qty, 0);
+}
+
+function addToCart(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const stock = STOCK[id]?? 0;
+  const cur = cart.get(id);
+  const nextQty = (cur?cur.qty:0)+1;
+  if(nextQty > stock){ alert('Sem estoque suficiente.'); return; }
+  cart.set(id, {product:p, qty:nextQty});
+  renderCart();
+}
+function inc(id){
+  const cur = cart.get(id); if(!cur) return;
+  const stock = STOCK[id]?? 0;
+  if(cur.qty+1 > stock){ alert('Sem estoque suficiente.'); return; }
+  cur.qty++; cart.set(id,cur); renderCart();
+}
+function dec(id){
+  const cur = cart.get(id); if(!cur) return;
+  cur.qty--; if(cur.qty<=0) cart.delete(id); else cart.set(id,cur); renderCart();
+}
+function removeItem(id){ cart.delete(id); renderCart(); }
+function clearCart(){ cart.clear(); renderCart(); }
+function buyNow(id){ addToCart(id); checkout(); }
+
+function checkout(){
+  const items = Array.from(cart.values());
+  if(items.length===0){ alert('Seu carrinho está vazio.'); return; }
+  for(const {product, qty} of items){
+    const s = STOCK[product.id]?? 0;
+    if(qty > s){ alert(`Estoque insuficiente de ${product.name}.`); return; }
+  }
+  const total = items.reduce((s,i)=> s + i.product.price * i.qty, 0);
+  const resumo = items.map(i=>`• ${i.product.name} x${i.qty} — ${formatBRL(i.product.price*i.qty)}`).join('\n');
+  const msg = `Pedido Lofi Brainrots\n\n${resumo}\n\nTotal: ${formatBRL(total)}\n\nApós pagar, envie o comprovante pra liberar.`;
+  window.open(PIX_LINK, '_blank');
+  setTimeout(()=>alert(msg), 400);
+}
+
+/** Admin UI (só aparece com a chave) */
+function renderAdmin(){
+  const wrap = document.getElementById('adminRows');
+  wrap.innerHTML = PRODUCTS.map(p => `
+    <div class="row2">
+      <div>${p.name}</div>
+      <div class="muted">Atual: <strong>${STOCK[p.id]??0}</strong></div>
+      <input type="number" min="0" step="1" value="${STOCK[p.id]??0}" data-id="${p.id}">
+    </div>
+  `).join('');
+}
+function saveStockFromInputs(){
+  document.querySelectorAll('#adminRows input[type="number"]').forEach(inp=>{
+    const id = inp.getAttribute('data-id');
+    const v = Math.max(0, parseInt(inp.value||'0',10));
+    STOCK[id] = v;
+  });
+  saveStock();
+  renderProducts();
+  renderCart();
+  alert('Estoque salvo!');
+}
+
+document.getElementById('clearBtn').addEventListener('click', clearCart);
+document.getElementById('checkoutBtn').addEventListener('click', checkout);
+document.getElementById('openCartBtn').addEventListener('click', ()=> {
+  document.getElementById('cartPanel').scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('saveStock').addEventListener('click', saveStockFromInputs);
+
+renderProducts(); renderCart(); if(isAdmin) renderAdmin();
+</script>
 </body>
 </html>
