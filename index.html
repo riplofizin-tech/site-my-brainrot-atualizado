@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lofi Brainrots - Loja Oficial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0a; color: #fff; font-family: 'Inter', sans-serif; line-height: 1.6; }
+    header { background: linear-gradient(135deg, #1a1a1a, #2c2c2c); padding: 40px 20px; text-align: center; border-bottom: 3px solid #d4af37; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 3.2em; color: #d4af37; margin-bottom: 8px; }
+    .subtitle { color: #aaa; font-size: 1.3em; }
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    h2 { text-align: center; color: #d4af37; margin-bottom: 40px; font-size: 2.2em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+    .card { background: #111111; border-radius: 16px; overflow: hidden; border: 1px solid #333; transition: all 0.4s; }
+    .card:hover { transform: translateY(-10px); border-color: #d4af37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
+    .card img { width: 100%; height: 240px; object-fit: contain; background: #1a1a1a; padding: 20px; }
+    .card-content { padding: 20px; text-align: center; }
+    .card h3 { color: #fff; margin-bottom: 10px; font-size: 1.4em; }
+    .price { font-size: 1.8em; color: #d4af37; font-weight: 700; margin: 12px 0; }
+    .btn-pix { background: linear-gradient(90deg, #d4af37, #f0d070); color: #000; font-weight: bold; font-size: 1.1em; padding: 14px 30px; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; transition: 0.3s; }
+    .btn-pix:hover { background: linear-gradient(90deg, #f0d070, #d4af37); transform: scale(1.05); }
+    .info { font-size: 0.95em; color: #888; margin-top: 15px; }
+    footer { text-align: center; padding: 40px 20px; background: #0a0a0a; border-top: 2px solid #333; margin-top: 60px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>LOFI BRAINROTS</h1>
+    <p class="subtitle">Loja Oficial • PIX Rápido</p>
+  </header>
+
+  <div class="container">
+    <h2>Brainrots à Venda</h2>
+
+    <div class="grid">
+
+      <!-- Lavadorito Spinito -->
+      <div class="card">
+        <img src="https://i.imgur.com/9FZVver.png" alt="Lavadorito Spinito">
+        <div class="card-content">
+          <h3>Lavadorito Spinito</h3>
+          <p class="price">R$ 32</p>
+          <button class="btn-pix" onclick="pagar('Lavadorito Spinito - R$ 32')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Ketupath (Ketupat Kepat) -->
+      <div class="card">
+        <img src="https://i.imgur.com/AJ8bfFB.png" alt="Ketupath">
+        <div class="card-content">
+          <h3>Ketupath (Ketupat Kepat)</h3>
+          <p class="price">R$ 25</p>
+          <button class="btn-pix" onclick="pagar('Ketupath - R$ 25')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Capitano (Capitano Moby) -->
+      <div class="card">
+        <img src="https://i.imgur.com/OMqnmmh.png" alt="Capitano Moby">
+        <div class="card-content">
+          <h3>Capitano (Capitano Moby)</h3>
+          <p class="price">R$ 110</p>
+          <button class="btn-pix" onclick="pagar('Capitano Moby - R$ 110')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Garama (Garama and Madundung) -->
+      <div class="card">
+        <img src="https://i.imgur.com/0A42ZGl.png" alt="Garama and Madundung">
+        <div class="card-content">
+          <h3>Garama (Garama and Madundung)</h3>
+          <p class="price">R$ 48</p>
+          <button class="btn-pix" onclick="pagar('Garama - R$ 48')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Tang Tang (Tang Tang Keletang) -->
+      <div class="card">
+        <img src="https://i.imgur.com/WgcHF83.png" alt="Tang Tang Keletang">
+        <div class="card-content">
+          <h3>Tang Tang (Tang Tang Keletang)</h3>
+          <p class="price">R$ 28</p>
+          <button class="btn-pix" onclick="pagar('Tang Tang - R$ 28')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Los Bros -->
+      <div class="card">
+        <img src="https://i.imgur.com/7vExo9Q.png" alt="Los Bros">
+        <div class="card-content">
+          <h3>Los Bros</h3>
+          <p class="price">R$ 22</p>
+          <button class="btn-pix" onclick="pagar('Los Bros - R$ 22')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Las Sis -->
+      <div class="card">
+        <img src="https://i.imgur.com/EAdqCHh.png" alt="Las Sis">
+        <div class="card-content">
+          <h3>Las Sis</h3>
+          <p class="price">R$ 16</p>
+          <button class="btn-pix" onclick="pagar('Las Sis - R$ 16')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Nuclearo (Nuclearo Dinossauro) -->
+      <div class="card">
+        <img src="https://i.imgur.com/w9aRsH6.png" alt="Nuclearo Dinossauro">
+        <div class="card-content">
+          <h3>Nuclearo (Nuclearo Dinossauro)</h3>
+          <p class="price">R$ 12</p>
+          <button class="btn-pix" onclick="pagar('Nuclearo - R$ 12')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Golg Gold (Gold Gold Gold) -->
+      <div class="card">
+        <img src="https://i.imgur.com/wfYLs2W.png" alt="Golg Gold">
+        <div class="card-content">
+          <h3>Golg Gold (Gold Gold Gold)</h3>
+          <p class="price">R$ 30</p>
+          <button class="btn-pix" onclick="pagar('Golg Gold - R$ 30')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Los Burritos -->
+      <div class="card">
+        <img src="https://i.imgur.com/ZrU85UX.png" alt="Los Burritos">
+        <div class="card-content">
+          <h3>Los Burritos</h3>
+          <p class="price">R$ 8</p>
+          <button class="btn-pix" onclick="pagar('Los Burritos - R$ 8')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Los Quesadilhas (Los Quesadillas) -->
+      <div class="card">
+        <img src="https://i.imgur.com/AwhFzj3.png" alt="Los Quesadilhas">
+        <div class="card-content">
+          <h3>Los Quesadilhas (Los Quesadillas)</h3>
+          <p class="price">R$ 9</p>
+          <button class="btn-pix" onclick="pagar('Los Quesadilhas - R$ 9')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+      <!-- Six Seven (Los 67) -->
+      <div class="card">
+        <img src="https://i.imgur.com/8iMaWz7.png" alt="Six Seven">
+        <div class="card-content">
+          <h3>Six Seven (Los 67)</h3>
+          <p class="price">R$ 18</p>
+          <button class="btn-pix" onclick="pagar('Six Seven - R$ 18')">Pagar via PIX</button>
+          <p class="info">Liberado só depois do pagamento</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>Pagamento via PIX • Liberado imediatamente após confirmação</strong></p>
+    <p>Manda comprovante pra eu liberar!</p>
+    <p style="margin-top: 20px; color: #666;">Lofi Brainrots © 2026</p>
+  </footer>
+
+  <script>
+    function pagar(item) {
+      window.open('https://linkspix.app/huroo', '_blank');
+      setTimeout(() => {
+        alert(`PIX aberto! Item: ${item}\n\nManda o comprovante pra eu liberar rápido.`);
+      }, 800);
+    }
+  </script>
+
+</body>
+</html>
